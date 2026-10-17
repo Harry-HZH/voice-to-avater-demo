@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>测试报告 — Watercolor Voice</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#6b6b6b; --line:#e4e4e4; --accent:#0f5f4c; --soft:#f4f7f6; --warn:#8a4b00; }
+  * { box-sizing:border-box; }
+  body { font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; color:var(--ink);
+         max-width:900px; margin:0 auto; padding:40px 32px 80px; line-height:1.65; font-size:15px; }
+  header { border-bottom:3px solid var(--accent); padding-bottom:16px; margin-bottom:28px; }
+  h1 { font-size:26px; margin:0 0 6px; }
+  h2 { font-size:19px; margin:36px 0 12px; color:var(--accent); border-left:4px solid var(--accent); padding-left:10px; }
+  h3 { font-size:15.5px; margin:20px 0 6px; }
+  .meta { color:var(--muted); font-size:13px; }
+  table { width:100%; border-collapse:collapse; margin:10px 0 6px; font-size:13.5px; }
+  th,td { border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top; }
+  th { background:var(--soft); font-weight:600; }
+  code { background:var(--soft); padding:1px 5px; border-radius:4px; font-size:12.5px; font-family:Consolas,monospace; }
+  .num { text-align:right; font-variant-numeric:tabular-nums; }
+  .pass { color:var(--accent); font-weight:600; }
+  .badge { display:inline-block; background:var(--accent); color:#fff; border-radius:20px;
+           padding:2px 12px; font-size:12.5px; margin-right:8px; }
+  .note { background:var(--soft); border-left:3px solid var(--accent); padding:10px 14px; margin:12px 0; font-size:13.5px; }
+  .warnbox { background:#fff8ee; border-left:3px solid var(--warn); padding:10px 14px; margin:12px 0; font-size:13.5px; }
+  ul { margin:6px 0; padding-left:20px; }
+  li { margin:3px 0; }
+  .kpi { display:flex; gap:14px; flex-wrap:wrap; margin:18px 0; }
+  .kpi div { flex:1; min-width:150px; background:var(--soft); border-radius:10px; padding:14px 16px; }
+  .kpi b { display:block; font-size:24px; color:var(--accent); }
+  .kpi span { font-size:12.5px; color:var(--muted); }
+  @media print {
+    body { padding:10mm 12mm; font-size:12px; }
+    h2 { page-break-after:avoid; }
+    table, .note, .warnbox { page-break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>测试报告 · Watercolor Voice</h1>
+  <div class="meta">项目：voice-to-avater-demo ｜ 日期：2026-10-17 ｜ 范围：后端接口与状态机（pytest）＋ 前端全流程（Playwright e2e）</div>
+</header>
+
+<div class="kpi">
+  <div><b>103</b><span>后端测试（pytest，全部通过）</span></div>
+  <div><b>10</b><span>前端 e2e 脚本（Playwright）</span></div>
+  <div><b>48 + 47</b><span>主流程 + 编辑页断言数（全过）</span></div>
+  <div><b>0</b><span>console / page 错误</span></div>
+</div>
+
+<h2>1. 覆盖了哪些地方</h2>
+
+<h3>1.1 后端（pytest · backend/tests/ · 103 项）</h3>
+<table>
+  <tr><th>测试文件</th><th>数量</th><th>覆盖内容</th></tr>
+  <tr><td><code>test_jobs.py</code></td><td class="num">7</td>
+      <td>任务状态机：queued 起始、状态按序推进、<b>终态不可再变更</b>（patch_job 终态保护）、列表过滤、未知任务</td></tr>
+  <tr><td><code>test_portraits_api.py</code></td><td class="num">21</td>
+      <td>候选形象全生命周期：提交、每张候选提示词不同、variant 换种子、<b>部分失败保留已成功图</b>、重试复用已成功图、换一批清缓存、取消拦截收尾、补三视图（参考图来源）、图片产物端点、<b>输入验证</b>（未知 voice、缺参考图、来源任务 404、非 portrait 拒绝重试）、取消幂等</td></tr>
+  <tr><td><code>test_speak_api.py</code></td><td class="num">40</td>
+      <td>说话视频全链路：<b>计费（点数随秒数线性）</b>、试听缓存（TTS 只买一次）、超长台词拒绝（<b>输入验证</b>）、空台词/未知音色拒绝、进度透传与边界、<b>取消语义三连</b>（上游调用前拦截不花钱 / 晚到写入不复活终态 / 轮询中途取消立即停止等待）、<b>取消的任务拒绝重试（409）</b>、重试只重跑视频且复用音轨（音轨丢失 409）、媒体时长解析</td></tr>
+  <tr><td><code>test_voices_api.py</code></td><td class="num">19</td><td>声音库列表、音色目录、导入、预览合成</td></tr>
+  <tr><td><code>test_samples.py</code></td><td class="num">6</td><td>试听音源缓存与就绪等待</td></tr>
+  <tr><td><code>test_thankyou_upload.py</code></td><td class="num">10</td><td>上游上传容错：超时、网络异常、文件缺失</td></tr>
+</table>
+
+<h3>1.2 前端 e2e（Playwright · verify/）</h3>
+<table>
+  <tr><th>脚本</th><th>结果</th><th>覆盖内容</th></tr>
+  <tr><td><code>e2e-create-job-flow.mjs</code></td><td class="pass">48/48</td>
+      <td>生成候选形象完整闭环：提交 → 等待页 → 离开再回来续走 → 任务中心 → 换一批 → <b>取消 → 失败页 → 重试</b> → 选图 → 保存 → 创作记录</td></tr>
+  <tr><td><code>e2e-edit-page.mjs</code></td><td class="pass">47/47</td>
+      <td>编辑角色信息：资料修改持久化、<b>无来源补图必须明确报错</b>（不许悄悄涨视图数）、弹窗交互</td></tr>
+  <tr><td><code>e2e-voice-library.mjs</code></td><td class="pass">通过</td><td>声音库：真实音源播放、声音详情</td></tr>
+  <tr><td><code>e2e-tab-refresh.mjs</code></td><td class="pass">通过</td><td>tab 聚焦刷新策略（网络断言：切回页面重新拉取数据）</td></tr>
+  <tr><td><code>e2e-delete.mjs</code> / <code>e2e-portrait-reopen.mjs</code> / <code>e2e-speak-studio.mjs</code> / <code>e2e-smoke-all-pages</code>（<code>smoke-all-pages.mjs</code>）</td><td class="pass">通过</td>
+      <td>任务删除、任务中心从后端恢复真实任务、说话创作台全流程（零成本 mock）、全页面冒烟</td></tr>
+  <tr><td><code>e2e-portrait-real.mjs</code> / <code>e2e-speak-real.mjs</code> / <code>e2e-edit-view-real.mjs</code></td><td class="note" style="border:none;background:none;color:#8a4b00">真实联调</td>
+      <td>真实调 ThankYou（会消耗点数，脚本头部标注），验证真实文生图 / 说话视频 / image-to-image 链路</td></tr>
+</table>
+
+<h2>2. 两项指定要求的覆盖位置</h2>
+
+<h3>任务状态变化</h3>
+<ul>
+  <li>状态机与顺序推进：<code>backend/tests/test_jobs.py::test_status_transitions_in_order</code></li>
+  <li>终态保护（取消后不得被晚到写入复活）：<code>test_speak_api.py::test_cancelled_job_is_not_revived_by_late_writes</code>、<code>test_jobs.py::test_terminal_state_cannot_change</code></li>
+  <li>轮询中途取消立即中止：<code>test_speak_api.py::test_cancel_during_upstream_poll_stops_waiting</code></li>
+  <li>部分失败 / 重试复用 / 换一批：<code>test_portraits_api.py</code>（partial_failure / retry_reuses / change_variant_clears_cache）</li>
+  <li>前端状态流转（等待→候选→失败→重试）：e2e-create-job-flow.mjs 全程断言</li>
+</ul>
+
+<h3>输入验证</h3>
+<ul>
+  <li>说话台词为空 / 超长 / 未知音色：<code>test_speak_api.py::test_preview_rejects_empty_script</code>、<code>test_create_speak_job_rejects_too_long_script</code>、<code>test_preview_rejects_unknown_voice</code></li>
+  <li>形象任务未知 voice / 缺参考图 / 来源任务不存在：<code>test_portraits_api.py::test_create_portrait_endpoint_validates_voice</code>、<code>test_views_endpoint_without_any_reference_is_rejected</code>、<code>test_views_endpoint_unknown_source_job_is_404</code></li>
+  <li>前端：台词超长由试听接口返回的 <code>over_limit</code> 拦下「生成视频」按钮；后端错误统一兜底文案（<code>frontend/src/lib/api.ts::userErrorMessage</code>）</li>
+</ul>
+
+<h2>3. 代码位置速查</h2>
+<table>
+  <tr><th>模块</th><th>位置</th><th>说明</th></tr>
+  <tr><td>任务状态机 / 终态保护</td><td><code>backend/app/jobs.py</code></td><td>patch_job 终态保护，全后端共用</td></tr>
+  <tr><td>说话视频生命周期</td><td><code>backend/app/videos.py</code></td><td>提交、进度透传、取消中止、_patch 终态守卫</td></tr>
+  <tr><td>候选形象 / 三视图</td><td><code>backend/app/portraits.py</code>、<code>portrait_ref.py</code></td><td>文生图、image-to-image、参考图解析</td></tr>
+  <tr><td>上游适配</td><td><code>backend/app/thankyou.py</code></td><td>ThankYou API 客户端与容错</td></tr>
+  <tr><td>任务路由</td><td><code>backend/app/routers/</code></td><td>jobs / speak / portraits 等 HTTP 层</td></tr>
+  <tr><td>任务生命周期（前端）</td><td><code>frontend/src/data/portrait.ts</code></td><td>提交、轮询（连续失败 4 次判死）、取消、重试</td></tr>
+  <tr><td>错误文案兜底</td><td><code>frontend/src/lib/api.ts</code></td><td>userErrorMessage：除输入校验/取消外统一「系统繁忙」</td></tr>
+  <tr><td>页面</td><td><code>frontend/app/</code></td><td>任务中心 jobs.tsx、创作台 avatar/[id]/create.tsx、形象生成 avatar/create/[voiceId].tsx</td></tr>
+</table>
+
+<h2>4. 测试方法说明</h2>
+<div class="note">
+  后端测试全部通过 conftest 的<b>假上游</b>（fake_provider）驱动：可精确控制上游返回成功/失败/超时，
+  并统计调用次数——「取消后零新增上游调用」「TTS 只买一次」这类<b>费用相关断言</b>因此可被严格验证，而不依赖真实扣点。
+  e2e 默认走演示模式（<code>vta.portraitMode=mock</code>）做零成本回归；真实链路由带标注的 <code>*-real.mjs</code> 脚本单独验证。
+</div>
+
+<h2>5. 已知边界（非缺陷，属明确取舍）</h2>
+<div class="warnbox">
+  <ul>
+    <li><b>上游取消不可达</b>：已提交给 ThankYou 的生成请求无法撤回，取消只保证本地立即停止等待、不再下载、状态不再被覆盖；上游是否扣点取决于其计费时点。</li>
+    <li><b>后端重启孤儿任务</b>：running 中重启后端，任务无人接管（需任务队列才能可靠恢复，见 README「没做的部分」）；用户可「取消 → 重试」，音轨有缓存时重试只花出片的钱。</li>
+    <li><b>前端任务列表是内存态</b>：刷新丢失，靠打开任务中心时与后端对齐恢复——后端是唯一真源，这是有意设计。</li>
+  </ul>
+</div>
+
+<p class="meta" style="margin-top:36px">生成于 2026-10-17 · 测试入口：<code>cd backend &amp;&amp; pytest tests/</code> ｜ <code>cd verify &amp;&amp; node e2e-create-job-flow.mjs</code>（需先起前端 8082 与后端 8000）</p>
+
+</body>
+</html>

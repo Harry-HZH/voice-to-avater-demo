@@ -1,0 +1,262 @@
+[
+  {
+    "id": "voice_001",
+    "name": "Aria",
+    "language": "en",
+    "tags": [
+      "female",
+      "warm",
+      "narration"
+    ],
+    "description": "A warm female voice for storytelling and audiobooks.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "me"
+  },
+  {
+    "id": "voice_002",
+    "name": "Max",
+    "language": "en",
+    "tags": [
+      "male",
+      "deep",
+      "documentary"
+    ],
+    "description": "A deep male voice with a calm documentary tone.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "me"
+  },
+  {
+    "id": "voice_003",
+    "name": "Luna",
+    "language": "en",
+    "tags": [
+      "female",
+      "bright",
+      "advertising"
+    ],
+    "description": "A bright, upbeat female voice for product ads.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "me"
+  },
+  {
+    "id": "voice_004",
+    "name": "Kai",
+    "language": "en",
+    "tags": [
+      "male",
+      "energetic",
+      "gaming"
+    ],
+    "description": "An energetic young male voice for game streaming.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "me"
+  },
+  {
+    "id": "voice_005",
+    "name": "Mei",
+    "language": "zh",
+    "tags": [
+      "female",
+      "soft",
+      "assistant"
+    ],
+    "description": "温柔的女声，适合智能助手和客服。",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "me"
+  },
+  {
+    "id": "voice_006",
+    "name": "Hao",
+    "language": "zh",
+    "tags": [
+      "male",
+      "steady",
+      "news"
+    ],
+    "description": "沉稳的男声，适合新闻播报。",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "me"
+  },
+  {
+    "id": "voice_007",
+    "name": "Yui",
+    "language": "ja",
+    "tags": [
+      "female",
+      "cute",
+      "anime"
+    ],
+    "description": "明るくて可愛い女性の声。アニメやゲーム向け。",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "me"
+  },
+  {
+    "id": "voice_008",
+    "name": "Ren",
+    "language": "ja",
+    "tags": [
+      "male",
+      "calm",
+      "narration"
+    ],
+    "description": "落ち着いた男性の声。ナレーション向け。",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "me"
+  },
+  {
+    "id": "voice_009",
+    "name": "Sofia",
+    "language": "es",
+    "tags": [
+      "female",
+      "warm",
+      "advertising"
+    ],
+    "description": "Voz femenina cálida para anuncios y promociones.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_010",
+    "name": "Diego",
+    "language": "es",
+    "tags": [
+      "male",
+      "raspy",
+      "character"
+    ],
+    "description": "Voz masculina ronca para personajes y juegos.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_011",
+    "name": "Chloe",
+    "language": "fr",
+    "tags": [
+      "female",
+      "elegant",
+      "audiobook"
+    ],
+    "description": "Une voix féminine élégante pour les livres audio.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_012",
+    "name": "Louis",
+    "language": "fr",
+    "tags": [
+      "male",
+      "smooth",
+      "podcast"
+    ],
+    "description": "Une voix masculine douce pour les podcasts.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_013",
+    "name": "Hanna",
+    "language": "de",
+    "tags": [
+      "female",
+      "clear",
+      "education"
+    ],
+    "description": "Eine klare weibliche Stimme für Lerninhalte.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_014",
+    "name": "Jonas",
+    "language": "de",
+    "tags": [
+      "male",
+      "friendly",
+      "assistant"
+    ],
+    "description": "Eine freundliche männliche Stimme für Assistenten.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_015",
+    "name": "Ji-woo",
+    "language": "ko",
+    "tags": [
+      "female",
+      "fresh",
+      "vlog"
+    ],
+    "description": "산뜻한 여성 목소리. 브이로그와 SNS 영상에 적합.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_016",
+    "name": "Min-jun",
+    "language": "ko",
+    "tags": [
+      "female",
+      "bold",
+      "trailer"
+    ],
+    "description": "힘 있는 여성 목소리. 예고편과 광고에 적합.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_017",
+    "name": "Ana",
+    "language": "pt",
+    "tags": [
+      "female",
+      "lively",
+      "ecommerce"
+    ],
+    "description": "Voz feminina animada para vídeos de e-commerce.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_018",
+    "name": "Rafael",
+    "language": "pt",
+    "tags": [
+      "male",
+      "warm",
+      "storytelling"
+    ],
+    "description": "Voz masculina calorosa para contar histórias.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_019",
+    "name": "Nora",
+    "language": "en",
+    "tags": [
+      "female",
+      "calm",
+      "meditation"
+    ],
+    "description": "A calm, soothing voice for meditation and sleep.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  },
+  {
+    "id": "voice_020",
+    "name": "Theo",
+    "language": "en",
+    "tags": [
+      "male",
+      "playful",
+      "character"
+    ],
+    "description": "A playful male voice for cartoon characters.",
+    "sample_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "owner": "library"
+  }
+]

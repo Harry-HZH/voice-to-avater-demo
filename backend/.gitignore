@@ -1,0 +1,6 @@
+# 数据与缓存（不提交仓库）
+.venv/
+data/
+__pycache__/
+*.pyc
+.env
